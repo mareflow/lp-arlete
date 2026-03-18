@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estética Arlete | Luxo e Sofisticação</title>
+    <title>Estética Arlete | Beleza e Bem-Estar</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- React & Libraries -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
@@ -26,10 +22,11 @@
                 extend: {
                     colors: {
                         gold: {
-                            DEFAULT: '#d4af37',
-                            light: '#f1d592',
-                            dark: '#aa8a2e',
-                        }
+                            light: '#d4af37',
+                            DEFAULT: '#b8860b',
+                            dark: '#926a08',
+                        },
+                        cream: '#fafaf9'
                     },
                     fontFamily: {
                         serif: ['Cormorant Garamond', 'serif'],
@@ -42,497 +39,182 @@
 
     <style>
         body {
-            background-color: black;
-            color: #e5e7eb;
-            overflow-x: hidden;
+            background-color: #ffffff;
+            color: #1c1917;
+            scroll-behavior: smooth;
         }
-        .selection-gold::selection {
-            background-color: rgba(212, 175, 55, 0.3);
-            color: #d4af37;
+        .hero-gradient {
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.9));
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #d4af37;
-            border-radius: 10px;
+        .service-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body class="selection-gold">
-    <div id="root"></div>
+<body class="font-sans antialiased">
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
-        const { motion, AnimatePresence } = FramerMotion;
-
-        // Icon Component Helper (since we are using Lucide CDN)
-        const Icon = ({ name, size = 24, className = "" }) => {
-            const iconRef = useRef(null);
-            useEffect(() => {
-                if (iconRef.current) {
-                    lucide.createIcons({
-                        attrs: {
-                            size: size,
-                            class: className
-                        },
-                        nameAttr: 'data-lucide',
-                        icons: { [name]: lucide.icons[name] }
-                    });
-                }
-            }, [name, size, className]);
-            return <i data-lucide={name} ref={iconRef} className={className}></i>;
-        };
-
-        const SERVICES = {
-            facial: {
-                id: 'facial',
-                title: "Estética Facial",
-                subtitle: "O Brilho da Juventude",
-                heroImg: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
-                description: "Revelamos a luminosidade da sua pele com protocolos de ouro e ativos nobres que rejuvenescem e protegem.",
-                items: [
-                    { title: "Bioestimuladores de colágeno", description: "Tratamentos injetáveis que estimulam a produção natural de colágeno para firmeza e sustentação." },
-                    { title: "Criofrequência facial", description: "Combinação de frio e calor para efeito lifting imediato e rejuvenescimento duradouro." },
-                    { title: "Dermopurificação (detox com gluco)", description: "Limpeza profunda com gluconolactona para renovação celular e desintoxicação da pele." },
-                    { title: "Design de sobrancelha", description: "Harmonização do olhar com técnicas precisas de visagismo e acabamento impecável." },
-                    { title: "Extensão de cílios fio a fio", description: "Alongamento clássico para um olhar natural, elegante e sofisticado todos os dias." },
-                    { title: "Extensão de cílios volume brasileiro", description: "Técnica que proporciona volume e densidade com leveza e naturalidade incomparáveis." }
-                ],
-                testimonials: [
-                    { name: "Helena Silva", text: "Minha pele nunca esteve tão radiante. O atendimento da Arlete é simplesmente impecável." },
-                    { name: "Beatriz Costa", text: "Um verdadeiro luxo. Saí me sentindo renovada e muito mais confiante." }
-                ]
-            },
-            body: {
-                id: 'body',
-                title: "Cuidados Corporais",
-                subtitle: "Esculpindo a Perfeição",
-                heroImg: "https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1974&auto=format&fit=crop",
-                description: "Tratamentos inovadores para contorno e firmeza, combinando tecnologia e técnicas manuais exclusivas.",
-                items: [
-                    { title: "Carboxiterapia corporal", description: "Infusão de CO2 medicinal para melhora da circulação, combate à celulite e gordura localizada." },
-                    { title: "Criolipólise", description: "Eliminação de gordura localizada através do congelamento controlado das células adiposas." },
-                    { title: "Criolipólise com sucção", description: "Técnica avançada de vácuo e resfriamento para resultados potencializados em áreas específicas." },
-                    { title: "Criolipólise de placas", description: "Aplicação sem sucção, ideal para áreas com pouca prega cutânea ou sensibilidade." },
-                    { title: "Criofrequência", description: "Tecnologia que associa frio intenso e radiofrequência para tratar gordura e flacidez simultaneamente." },
-                    { title: "Detóx orgânico by Botânica", description: "Ritual de purificação com ativos naturais para eliminar toxinas e reduzir o inchaço." },
-                    { title: "Drenocrio (criofrequência)", description: "Protocolo exclusivo que une drenagem linfática à tecnologia de criofrequência." },
-                    { title: "Drenodetox", description: "Massagem vigorosa que combina técnicas de drenagem e modelagem para resultados imediatos." },
-                    { title: "Esculação corporal", description: "Técnica manual de alta performance para definição de contornos e redução de medidas." },
-                    { title: "Lipodetóx aromático", description: "Tratamento redutor que utiliza óleos essenciais nobres para potencializar a queima de gordura." },
-                    { title: "Lipossem corte", description: "Alternativa não invasiva à lipoaspiração, focada na destruição de células de gordura." },
-                    { title: "Magic Touch Detóx", description: "Circuito de tratamentos que promove perda de medidas e desintoxicação em uma única sessão." },
-                    { title: "Massagem modeladora feminina", description: "Manobras intensas para reorganizar o tecido adiposo e esculpir a silhueta feminina." },
-                    { title: "Powershape", description: "Plataforma multifuncional que associa laser, radiofrequência e vácuo para tratar celulite e gordura." },
-                    { title: "Powershape Body", description: "Versão intensiva do Powershape focada em grandes áreas corporais para máxima definição." },
-                    { title: "Radiofrequência corporal", description: "Aquecimento profundo dos tecidos para estímulo de colágeno e combate à flacidez corporal." },
-                    { title: "Glúteos blindados", description: "Protocolo exclusivo para empinar, tonificar e melhorar a textura da pele da região glútea." }
-                ],
-                testimonials: [
-                    { name: "Mariana Lins", text: "Os resultados no meu corpo foram visíveis logo nas primeiras sessões. Recomendo muito!" },
-                    { name: "Carla Souza", text: "A melhor drenagem que já fiz. O ambiente é extremamente acolhedor e luxuoso." }
-                ]
-            },
-            camouflage: {
-                id: 'camouflage',
-                title: "Camuflagem & Estética",
-                subtitle: "A Arte da Correção",
-                heroImg: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=2070&auto=format&fit=crop",
-                description: "Técnicas artísticas e paramédicas para suavizar marcas e uniformizar o tom da pele com naturalidade.",
-                items: [
-                    { title: "Camuflagem estética (estrias)", description: "Pigmentação inteligente que suaviza o contraste das estrias com o tom natural da pele." },
-                    { title: "Camuflagem de vitiligo", description: "Procedimento paramédico para uniformizar áreas acrômicas, devolvendo a autoestima." },
-                    { title: "Camuflagem estética (cicatriz)", description: "Técnica refinada para disfarçar cicatrizes cirúrgicas ou acidentais de forma imperceptível." },
-                    { title: "Clareamento íntimo combinado com linha", description: "Protocolo delicado para uniformizar o tom de áreas sensíveis com segurança e eficácia." }
-                ],
-                testimonials: [
-                    { name: "Sofia Mendes", text: "A camuflagem de estrias mudou minha relação com meu corpo. O resultado é impressionante." },
-                    { name: "Aline Rocha", text: "Profissionalismo impecável. O clareamento íntimo superou todas as minhas expectativas." }
-                ]
-            },
-            epilation: {
-                id: 'epilation',
-                title: "Depilação de Luxo",
-                subtitle: "Seda e Suavidade",
-                heroImg: "https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?q=80&w=2070&auto=format&fit=crop",
-                description: "Protocolos exclusivos de remoção de pelos que priorizam o conforto e a saúde da sua pele.",
-                items: [
-                    { title: "Depilação a laser", description: "Tecnologia de ponta para eliminação definitiva dos pelos com máximo conforto." },
-                    { title: "Depilação com cera de mel feminina", description: "Método tradicional com cera natural que hidrata enquanto remove os pelos pela raiz." },
-                    { title: "Depilação com cera de mel masculina", description: "Atendimento especializado para o público masculino com foco em eficiência e suavidade." },
-                    { title: "Depilação com cera espanhola feminina", description: "Técnica de baixa temperatura que reduz a dor e é ideal para peles e áreas sensíveis." },
-                    { title: "Depilação com cera espanhola masculina", description: "Remoção eficaz de pelos masculinos com técnica espanhola para menor desconforto." },
-                    { title: "Depilação egípcia com linha feminina", description: "Remoção precisa de pelos faciais pela raiz, ideal para quem busca definição e durabilidade." }
-                ],
-                testimonials: [
-                    { name: "Juliana Paes", text: "Liberdade total! O laser é super tranquilo e o resultado superou minhas expectativas." },
-                    { name: "Renata Lima", text: "Melhor investimento que fiz para mim. A equipe da Arlete é muito profissional." }
-                ]
-            }
-        };
-
-        function App() {
-            const [activeTab, setActiveTab] = useState('facial');
-            const [isMenuOpen, setIsMenuOpen] = useState(false);
-            const [scrolled, setScrolled] = useState(false);
-
-            useEffect(() => {
-                const handleScroll = () => setScrolled(window.scrollY > 50);
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
-            }, []);
-
-            const current = SERVICES[activeTab];
-
-            return (
-                <div className="min-h-screen font-sans">
-                    {/* Navigation */}
-                    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-                        scrolled ? 'bg-black/90 backdrop-blur-md h-16 border-b border-white/5' : 'bg-transparent h-24'
-                    }`}>
-                        <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-                            <div className="flex items-center gap-2">
-                                <div className="w-10 h-10 border border-gold/50 rounded-full flex items-center justify-center">
-                                    <span className="text-gold font-serif text-xl italic">A</span>
-                                </div>
-                                <h1 className="text-xl font-serif tracking-widest uppercase text-gold">
-                                    Estética Arlete
-                                </h1>
-                            </div>
-
-                            <div className="hidden lg:flex items-center gap-10">
-                                {Object.keys(SERVICES).map(tabId => (
-                                    <button
-                                        key={tabId}
-                                        onClick={() => {
-                                            setActiveTab(tabId);
-                                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                                        }}
-                                        className={`text-[10px] uppercase tracking-[0.3em] transition-all duration-300 hover:text-gold ${
-                                            activeTab === tabId ? 'text-gold' : 'text-stone-500'
-                                        }`}
-                                    >
-                                        {SERVICES[tabId].id === 'epilation' ? 'Depilação' : 
-                                         SERVICES[tabId].id === 'camouflage' ? 'Camuflagem' : 
-                                         SERVICES[tabId].id === 'body' ? 'Corporal' : 'Facial'}
-                                    </button>
-                                ))}
-                            </div>
-
-                            <div className="flex items-center gap-6">
-                                <button className="hidden sm:flex items-center gap-2 px-6 py-2 bg-gold text-black rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all duration-500">
-                                    Agendar
-                                </button>
-                                <button 
-                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                                    className="lg:hidden text-gold"
-                                >
-                                    <Icon name={isMenuOpen ? "X" : "Menu"} />
-                                </button>
-                            </div>
-                        </div>
-                    </nav>
-
-                    {/* Mobile Menu */}
-                    <AnimatePresence>
-                        {isMenuOpen && (
-                            <motion.div
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                className="fixed inset-0 z-40 bg-black pt-24 px-6 lg:hidden"
-                            >
-                                <div className="flex flex-col gap-8">
-                                    {Object.keys(SERVICES).map(tabId => (
-                                        <button
-                                            key={tabId}
-                                            onClick={() => {
-                                                setActiveTab(tabId);
-                                                setIsMenuOpen(false);
-                                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                                            }}
-                                            className={`text-2xl font-serif italic text-left ${
-                                                activeTab === tabId ? 'text-gold' : 'text-stone-500'
-                                            }`}
-                                        >
-                                            {SERVICES[tabId].title}
-                                        </button>
-                                    ))}
-                                    <div className="h-px bg-white/10 my-4" />
-                                    <button className="w-full py-4 bg-gold text-black rounded-lg font-bold uppercase tracking-widest text-xs">
-                                        Agendar Consulta
-                                    </button>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeTab}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            {/* Hero */}
-                            <section className="relative h-screen flex items-center overflow-hidden">
-                                <div className="absolute inset-0 z-0">
-                                    <motion.div
-                                        initial={{ scale: 1.1 }}
-                                        animate={{ scale: 1 }}
-                                        transition={{ duration: 2 }}
-                                        className="absolute inset-0 bg-cover bg-center opacity-40"
-                                        style={{ backgroundImage: `url(${current.heroImg})` }}
-                                    />
-                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                                </div>
-
-                                <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-                                    <motion.div
-                                        initial={{ opacity: 0, x: -30 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.3, duration: 0.8 }}
-                                    >
-                                        <span className="text-gold uppercase tracking-[0.5em] text-[10px] mb-4 block">
-                                            {current.subtitle}
-                                        </span>
-                                        <h2 className="text-6xl md:text-8xl font-serif leading-tight mb-8">
-                                            {current.title.split(' ')[0]} 
-                                            <span className="italic text-gold block">
-                                                {current.title.split(' ').slice(1).join(' ')}
-                                            </span>
-                                        </h2>
-                                        <p className="text-stone-400 text-lg max-w-md mb-10 font-light leading-relaxed">
-                                            {current.description}
-                                        </p>
-                                        <div className="flex flex-wrap gap-6">
-                                            <button className="group flex items-center gap-4 px-10 py-4 bg-gold text-black rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-white transition-all duration-300">
-                                                Descobrir Mais
-                                                <Icon name="ArrowRight" size={16} className="group-hover:translate-x-1 transition-transform" />
-                                            </button>
-                                        </div>
-                                    </motion.div>
-                                </div>
-
-                                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-4 items-center">
-                                    {Object.keys(SERVICES).map(tabId => (
-                                        <button
-                                            key={tabId}
-                                            onClick={() => setActiveTab(tabId)}
-                                            className={`h-px transition-all duration-700 ${
-                                                activeTab === tabId ? 'w-12 bg-gold' : 'w-6 bg-stone-800'
-                                            }`}
-                                        />
-                                    ))}
-                                </div>
-                            </section>
-
-                            {/* Services List */}
-                            <section className="py-32 bg-stone-950">
-                                <div className="max-w-7xl mx-auto px-6">
-                                    <div className="text-center mb-24">
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            viewport={{ once: true }}
-                                        >
-                                            <h3 className="font-serif text-4xl md:text-5xl text-gold italic mb-4">
-                                                Nossas Especialidades
-                                            </h3>
-                                            <p className="text-stone-500 uppercase tracking-[0.3em] text-[10px] mb-8">
-                                                Excelência em {current.title}
-                                            </p>
-                                            <div className="w-20 h-px bg-gold mx-auto" />
-                                        </motion.div>
-                                    </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        {current.items.map((item, i) => (
-                                            <motion.div
-                                                key={i}
-                                                initial={{ opacity: 0, y: 30 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true }}
-                                                transition={{ delay: i * 0.1 }}
-                                                className="p-8 border border-white/5 bg-black/50 hover:border-gold/30 transition-all duration-500 group rounded-2xl flex flex-col h-full"
-                                            >
-                                                <div className="w-10 h-10 border border-gold/20 rounded-full flex items-center justify-center mb-6 group-hover:bg-gold transition-all duration-500">
-                                                    <Icon name="CheckCircle2" size={16} className="text-gold group-hover:text-black transition-colors" />
-                                                </div>
-                                                <h4 className="text-gold font-serif text-lg mb-3 uppercase tracking-widest leading-tight">
-                                                    {item.title}
-                                                </h4>
-                                                <p className="text-stone-500 text-xs leading-relaxed font-light">
-                                                    {item.description}
-                                                </p>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Our Space */}
-                            <section className="py-32 bg-black">
-                                <div className="max-w-7xl mx-auto px-6">
-                                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                                        <motion.div
-                                            initial={{ opacity: 0, x: -30 }}
-                                            whileInView={{ opacity: 1, x: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.8 }}
-                                        >
-                                            <span className="text-gold uppercase tracking-[0.5em] text-[10px] mb-4 block">
-                                                Ambiente Exclusivo
-                                            </span>
-                                            <h3 className="font-serif text-5xl md:text-6xl mb-8 leading-tight">
-                                                O Nosso <br />
-                                                <span className="text-gold italic">Santuário</span>
-                                            </h3>
-                                            <p className="text-stone-400 text-lg font-light leading-relaxed mb-10">
-                                                Cada detalhe da Estética Arlete foi projetado para oferecer uma experiência de imersão total no luxo e no bem-estar. Nossas salas são refúgios de tranquilidade, equipadas com o que há de mais moderno na estética mundial.
-                                            </p>
-                                            <div className="grid grid-cols-2 gap-6">
-                                                <div className="p-6 border border-white/5 bg-stone-950 rounded-xl">
-                                                    <h5 className="text-gold font-serif text-lg mb-2">Privacidade</h5>
-                                                    <p className="text-stone-500 text-xs font-light">Atendimento individualizado em salas privativas e climatizadas.</p>
-                                                </div>
-                                                <div className="p-6 border border-white/5 bg-stone-950 rounded-xl">
-                                                    <h5 className="text-gold font-serif text-lg mb-2">Conforto</h5>
-                                                    <p className="text-stone-500 text-xs font-light">Mobiliário ergonômico e enxoval de alta gramatura para seu relaxamento.</p>
-                                                </div>
-                                            </div>
-                                        </motion.div>
-
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <div className="space-y-4">
-                                                <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=2070&auto=format&fit=crop" className="rounded-2xl w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                                                <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop" className="rounded-2xl w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                                            </div>
-                                            <div className="space-y-4 pt-12">
-                                                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop" className="rounded-2xl w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                                                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2070&auto=format&fit=crop" className="rounded-2xl w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* Testimonials */}
-                            <section className="py-32 bg-black relative overflow-hidden">
-                                <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none flex items-center justify-center">
-                                    <span className="text-[25vw] font-serif italic text-gold select-none">Arlete</span>
-                                </div>
-                                
-                                <div className="max-w-5xl mx-auto px-6 relative z-10">
-                                    <div className="text-center mb-20">
-                                        <Icon name="Quote" size={40} className="text-gold/40 mx-auto mb-6" />
-                                        <h3 className="font-serif text-4xl italic">Experiências Reais</h3>
-                                        <p className="text-stone-500 text-[10px] uppercase tracking-[0.4em] mt-4">O que nossas clientes dizem</p>
-                                    </div>
-
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-                                        {current.testimonials.map((t, i) => (
-                                            <motion.div
-                                                key={i}
-                                                initial={{ opacity: 0, scale: 0.95 }}
-                                                whileInView={{ opacity: 1, scale: 1 }}
-                                                viewport={{ once: true }}
-                                                className="relative"
-                                            >
-                                                <p className="italic text-stone-300 text-xl leading-relaxed border-l-2 border-gold/20 pl-10">
-                                                    "{t.text}"
-                                                </p>
-                                                <span className="block mt-8 pl-10 text-gold font-serif not-italic text-sm uppercase tracking-[0.2em]">
-                                                    — {t.name}
-                                                </span>
-                                            </motion.div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </section>
-
-                            {/* CTA */}
-                            <section className="py-32 bg-stone-950 border-t border-white/5">
-                                <div className="max-w-4xl mx-auto px-6 text-center">
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        viewport={{ once: true }}
-                                    >
-                                        <h3 className="font-serif text-5xl md:text-7xl mb-8 leading-tight">
-                                            Pronta para sua <br />
-                                            <span className="text-gold italic">Transformação?</span>
-                                        </h3>
-                                        <p className="text-stone-500 mb-16 uppercase tracking-[0.3em] text-xs font-light">
-                                            Reserve seu horário exclusivo na Estética Arlete
-                                        </p>
-                                        
-                                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                                            <button className="w-full sm:w-auto px-12 py-5 bg-gold text-black font-bold uppercase tracking-widest text-[10px] hover:bg-white transition-all duration-500 flex items-center justify-center gap-3">
-                                                <Icon name="Phone" size={16} />
-                                                Agendar via WhatsApp
-                                            </button>
-                                            <button className="w-full sm:w-auto px-12 py-5 border border-gold/50 text-gold font-bold uppercase tracking-widest text-[10px] hover:bg-gold hover:text-black transition-all duration-500 flex items-center justify-center gap-3">
-                                                <Icon name="Calendar" size={16} />
-                                                Ver Tabela de Preços
-                                            </button>
-                                        </div>
-
-                                        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-40">
-                                            {['Atendimento VIP', 'Ambiente Seguro', 'Produtos Premium', 'Resultados Reais'].map((item, i) => (
-                                                <div key={i} className="flex flex-col items-center gap-2">
-                                                    <Icon name="CheckCircle2" size={18} className="text-gold" />
-                                                    <span className="text-[9px] uppercase tracking-widest">{item}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </motion.div>
-                                </div>
-                            </section>
-                        </motion.div>
-                    </AnimatePresence>
-
-                    {/* Footer */}
-                    <footer className="py-20 border-t border-white/5 bg-black">
-                        <div className="max-w-7xl mx-auto px-6">
-                            <div className="flex flex-col items-center text-center">
-                                <div className="flex items-center gap-2 mb-8">
-                                    <div className="w-12 h-12 border border-gold/50 rounded-full flex items-center justify-center">
-                                        <span className="text-gold font-serif text-2xl italic">A</span>
-                                    </div>
-                                    <h1 className="text-2xl font-serif tracking-widest uppercase text-gold">
-                                        Estética Arlete
-                                    </h1>
-                                </div>
-                                
-                                <div className="flex gap-10 mb-16">
-                                    <Icon name="Instagram" size={20} className="text-stone-500 hover:text-gold cursor-pointer transition-colors" />
-                                    <Icon name="Facebook" size={20} className="text-stone-500 hover:text-gold cursor-pointer transition-colors" />
-                                    <Icon name="Phone" size={20} className="text-stone-500 hover:text-gold cursor-pointer transition-colors" />
-                                </div>
-
-                                <p className="text-[10px] text-stone-700 uppercase tracking-[0.5em] mb-4">
-                                    © 2026 Estética Arlete. Todos os direitos reservados.
-                                </p>
-                                <p className="text-[9px] text-stone-800 uppercase tracking-widest">
-                                    Onde a beleza encontra o luxo absoluto.
-                                </p>
-                            </div>
-                        </div>
-                    </footer>
+    <!-- Header / Nav -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-stone-100 h-20">
+        <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 border-2 border-gold rounded-full flex items-center justify-center">
+                    <span class="text-gold font-serif text-xl font-bold italic">A</span>
                 </div>
-            );
-        }
+                <h1 class="text-xl font-serif tracking-widest uppercase text-stone-800">Estética Arlete</h1>
+            </div>
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+            <div class="hidden md:flex items-center gap-8 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-600">
+                <a href="#inicio" class="hover:text-gold transition-colors">Início</a>
+                <a href="#servicos" class="hover:text-gold transition-colors">Serviços</a>
+                <a href="#espaco" class="hover:text-gold transition-colors">O Espaço</a>
+                <a href="#contato" class="px-5 py-2 bg-gold text-white rounded-full hover:bg-gold-dark transition-all">Agendar</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative h-screen flex items-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" 
+                 class="w-full h-full object-cover" alt="Estética Facial">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+            <div class="max-w-2xl">
+                <span class="text-gold uppercase tracking-[0.4em] text-xs font-semibold mb-4 block">Bem-vinda à excelência</span>
+                <h2 class="text-6xl md:text-8xl font-serif leading-[1.1] mb-8 text-stone-900">
+                    O Brilho da <br>
+                    <span class="italic text-gold">Juventude</span>
+                </h2>
+                <p class="text-stone-600 text-lg mb-10 font-light leading-relaxed">
+                    Revelamos a luminosidade da sua pele com protocolos exclusivos e ativos nobres que rejuvenescem e protegem a sua beleza natural.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#servicos" class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-white rounded-full font-bold uppercase tracking-widest text-[11px] hover:shadow-lg hover:shadow-gold/20 transition-all">
+                        Ver Nossos Tratamentos
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-24 bg-cream">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h3 class="font-serif text-4xl md:text-5xl text-stone-900 mb-4">Tratamentos Especializados</h3>
+                <p class="text-stone-500 uppercase tracking-widest text-[10px]">Cuidado facial, corporal e tecnológico</p>
+                <div class="w-16 h-1 bg-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="service-card p-8 bg-white border border-stone-100 rounded-3xl shadow-sm">
+                    <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="sparkles" class="text-gold w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-stone-900 font-serif text-xl mb-3">Estética Facial</h4>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Bioestimuladores, limpeza profunda com gluco, design de sobrancelhas e extensões de cílios luxuosas.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card p-8 bg-white border border-stone-100 rounded-3xl shadow-sm">
+                    <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="smile" class="text-gold w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-stone-900 font-serif text-xl mb-3">Escultura Corporal</h4>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Criolipólise, Radiofrequência, DrenoDetox e o exclusivo Magic Touch Detóx para redução imediata.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card p-8 bg-white border border-stone-100 rounded-3xl shadow-sm">
+                    <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <i data-lucide="layers" class="text-gold w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-stone-900 font-serif text-xl mb-3">Camuflagem Estética</h4>
+                    <p class="text-stone-500 text-sm leading-relaxed mb-4">Tratamento artístico de estrias, cicatrizes e vitiligo com pigmentação inteligente e natural.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Space / About -->
+    <section id="espaco" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-gold uppercase tracking-widest text-xs font-bold mb-4 block">Nosso Refúgio</span>
+                    <h3 class="font-serif text-5xl mb-8 leading-tight text-stone-900">Um ambiente de <br><span class="italic text-gold">paz e sofisticação</span></h3>
+                    <p class="text-stone-600 text-lg font-light leading-relaxed mb-8">
+                        Cada detalhe foi projetado para oferecer uma experiência de imersão total. Nossas salas são climatizadas, privativas e equipadas com a mais alta tecnologia mundial.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="check" class="text-gold mt-1"></i>
+                            <div>
+                                <h5 class="font-bold text-stone-800">Atendimento VIP</h5>
+                                <p class="text-stone-500 text-sm">Sessões individuais focadas exclusivamente em você.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <i data-lucide="check" class="text-gold mt-1"></i>
+                            <div>
+                                <h5 class="font-bold text-stone-800">Produtos Premium</h5>
+                                <p class="text-stone-500 text-sm">Utilizamos as melhores linhas cosméticas do mercado.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=2070&auto=format&fit=crop" class="rounded-2xl h-64 w-full object-cover shadow-lg" alt="Spa">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070&auto=format&fit=crop" class="rounded-2xl h-64 w-full object-cover shadow-lg mt-8" alt="Tratamento">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contato" class="py-20 bg-stone-900 text-white text-center">
+        <div class="max-w-3xl mx-auto px-6">
+            <h3 class="font-serif text-4xl md:text-5xl mb-8">Pronta para sua transformação?</h3>
+            <p class="text-stone-400 mb-10 font-light">Agende sua avaliação personalizada e descubra o melhor tratamento para você.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="px-10 py-4 bg-gold text-white font-bold rounded-full hover:bg-gold-dark transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    Falar no WhatsApp
+                </a>
+                <a href="#" class="px-10 py-4 border border-white/20 hover:bg-white/10 text-white font-bold rounded-full transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4"></i>
+                    Ver Preços
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-white border-t border-stone-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex flex-col items-center">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-8 h-8 border border-gold rounded-full flex items-center justify-center font-serif italic text-gold">A</div>
+                    <h1 class="font-serif tracking-widest uppercase text-stone-800">Estética Arlete</h1>
+                </div>
+                <div class="flex gap-6 mb-8 text-stone-400">
+                    <i data-lucide="instagram" class="hover:text-gold cursor-pointer"></i>
+                    <i data-lucide="facebook" class="hover:text-gold cursor-pointer"></i>
+                    <i data-lucide="mail" class="hover:text-gold cursor-pointer"></i>
+                </div>
+                <p class="text-xs text-stone-400 tracking-widest uppercase">© 2026 Estética Arlete. Onde a beleza encontra o luxo.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
     </script>
 </body>
 </html>
