@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estética Arlete | Luxo e Sofisticação</title>
+    <title>Estética Arlete | Excelência em Beleza</title>
     
-    <!-- Fonts: Cormorant para títulos de luxo e Inter para leitura -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS para o layout -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -20,269 +20,257 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: {
-                            light: '#f1d592',
-                            DEFAULT: '#d4af37',
-                            dark: '#aa8a2e',
-                        },
-                        darkBody: '#0c0a09', // O fundo grafite das fotos
-                        darkCard: '#141210', // Tom dos cartões
+                        gold: { light: '#f1d592', DEFAULT: '#d4af37', dark: '#aa8a2e' },
+                        darkBody: '#0c0a09',
+                        darkCard: '#141210',
                     },
-                    fontFamily: {
-                        serif: ['Cormorant Garamond', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    fontFamily: { serif: ['Cormorant Garamond', 'serif'], sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
 
     <style>
-        body {
-            background-color: #0c0a09;
-            color: #e7e5e4;
-            scroll-behavior: smooth;
-        }
+        body { background-color: #0c0a09; color: #e7e5e4; scroll-behavior: smooth; }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.8s ease-out; }
+        .tab-content.active { display: block; animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .gold-border-card {
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            background: #141210;
-            transition: all 0.3s ease;
-        }
-        .gold-border-card:hover {
-            border-color: #d4af37;
-            transform: translateY(-5px);
-        }
-        
-        .nav-link {
-            position: relative;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
+        .nav-link { cursor: pointer; transition: all 0.3s; position: relative; color: #78716c; }
         .nav-link.active { color: #d4af37; }
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: #d4af37;
-        }
+        .nav-link.active::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 100%; height: 1px; background: #d4af37; }
+        
+        .service-card { border: 1px solid rgba(212, 175, 55, 0.1); background: #141210; transition: all 0.4s; }
+        .service-card:hover { border-color: #d4af37; transform: translateY(-5px); }
     </style>
 </head>
 <body class="font-sans antialiased">
 
-    <!-- Navegação -->
+    <!-- Header Fixo -->
     <nav class="fixed top-0 w-full z-50 bg-darkBody/95 border-b border-white/5 h-20">
         <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 border border-gold rounded-full flex items-center justify-center">
-                    <span class="text-gold font-serif text-xl italic">A</span>
-                </div>
-                <h1 class="text-lg font-serif tracking-widest uppercase text-gold">Estética Arlete</h1>
+                <div class="w-10 h-10 border border-gold rounded-full flex items-center justify-center font-serif text-gold italic text-xl">A</div>
+                <h1 class="text-sm font-serif tracking-[0.3em] uppercase text-gold">Estética Arlete</h1>
             </div>
-
-            <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-500">
+            <div class="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.2em]">
                 <span onclick="switchTab('facial')" class="nav-link active" id="btn-facial">Facial</span>
                 <span onclick="switchTab('corporal')" class="nav-link" id="btn-corporal">Corporal</span>
                 <span onclick="switchTab('spa')" class="nav-link" id="btn-spa">Spa</span>
                 <span onclick="switchTab('depilacao')" class="nav-link" id="btn-depilacao">Depilação</span>
             </div>
-
-            <a href="https://wa.me/SEUNUMERO" class="px-6 py-2 bg-gold text-black text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-white transition-all">
-                Agendar
-            </a>
+            <a href="#" class="px-6 py-2 bg-gold text-black text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-white transition-all">Agendar</a>
         </div>
     </nav>
 
-    <!-- CONTEÚDO: FACIAL -->
-    <main id="tab-facial" class="tab-content active pt-20">
-        <!-- Hero Facial -->
-        <section class="relative h-[80vh] flex items-center px-6 overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070" class="w-full h-full object-cover opacity-40">
-                <div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div>
-            </div>
+    <!-- TAB: FACIAL -->
+    <div id="tab-facial" class="tab-content active">
+        <!-- Hero -->
+        <section class="relative h-screen flex items-center px-6">
+            <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070" class="w-full h-full object-cover opacity-30"><div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div></div>
             <div class="relative z-10 max-w-7xl mx-auto w-full">
-                <span class="text-gold uppercase tracking-[0.4em] text-[10px] mb-4 block">O Brilho da Juventude</span>
-                <h2 class="text-6xl md:text-8xl font-serif mb-6 leading-tight">Estética <br><span class="italic text-gold">Facial</span></h2>
-                <p class="max-w-md text-stone-400 font-light leading-relaxed mb-8">Revelamos a luminosidade da sua pele com protocolos de ouro e ativos nobres que rejuvenescem e protegem.</p>
-                <button class="px-8 py-4 bg-gold text-black font-bold uppercase tracking-widest text-[10px] flex items-center gap-3">
-                    Descobrir Mais <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
+                <span class="text-gold uppercase tracking-[0.5em] text-[10px] mb-4 block">O Brilho da Juventude</span>
+                <h2 class="text-6xl md:text-8xl font-serif mb-8 leading-tight">Estética <br><span class="italic text-gold">Facial</span></h2>
+                <p class="max-w-md text-stone-400 font-light mb-10">Revelamos a luminosidade da sua pele com protocolos de ouro e ativos nobres.</p>
+                <button class="px-10 py-4 bg-gold text-black font-bold uppercase tracking-widest text-[10px] flex items-center gap-4">Explorar Tratamentos <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
             </div>
         </section>
 
-        <!-- Cards Facial -->
+        <!-- Grade de 9 Serviços -->
         <section class="py-24 px-6 bg-darkBody">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="gold-border-card p-8 rounded-2xl">
-                    <i data-lucide="sparkles" class="text-gold mb-6 w-6 h-6"></i>
-                    <h4 class="font-serif text-xl mb-3 text-gold italic uppercase tracking-widest">Bioestimuladores</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">Tratamentos injetáveis que estimulam a produção natural de colágeno para firmeza e sustentação.</p>
-                </div>
-                <div class="gold-border-card p-8 rounded-2xl">
-                    <i data-lucide="zap" class="text-gold mb-6 w-6 h-6"></i>
-                    <h4 class="font-serif text-xl mb-3 text-gold italic uppercase tracking-widest">Criofrequência</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">Combinação de frio e calor para efeito lifting imediato e rejuvenescimento duradouro da face.</p>
-                </div>
-                <div class="gold-border-card p-8 rounded-2xl">
-                    <i data-lucide="droplets" class="text-gold mb-6 w-6 h-6"></i>
-                    <h4 class="font-serif text-xl mb-3 text-gold italic uppercase tracking-widest">Detox Facial</h4>
-                    <p class="text-xs text-stone-500 leading-relaxed">Limpeza profunda com ativos desintoxicantes para renovação celular e pele radiante.</p>
+            <div class="max-w-7xl mx-auto">
+                <h3 class="font-serif text-4xl text-center mb-16 text-gold italic">Nossas Especialidades Faciais</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 9 Quadrinhos -->
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="sparkles" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Limpeza de Pele Ouro</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Desintoxicação profunda com máscara de ouro 24k.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="zap" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Bioestimuladores</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Estimulo natural de colágeno para firmeza real.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="droplets" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Peeling de Cristal</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Renovação celular para uma pele de porcelana.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="smile" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Botox Preventivo</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Suavização de linhas com naturalidade absoluta.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="sun" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Microagulhamento</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Tratamento de cicatrizes e poros dilatados.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="shield-check" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">LED Terapia</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Tratamento para acalmar e rejuvenescer a derme.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="gem" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Preenchimento Labial</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Contorno e volume com ácido hialurônico premium.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="wind" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Carboxiterapia Facial</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Combate a olheiras e flacidez das pálpebras.</p>
+                    </div>
+                    <div class="service-card p-8 rounded-2xl text-center">
+                        <i data-lucide="star" class="text-gold mx-auto mb-4 w-6 h-6"></i>
+                        <h4 class="text-white font-serif text-lg mb-2 tracking-widest uppercase">Lifting com Fios</h4>
+                        <p class="text-[11px] text-stone-500 font-light">Sustentação imediata sem cortes cirúrgicos.</p>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <!-- CONTEÚDO: CORPORAL -->
-    <main id="tab-corporal" class="tab-content pt-20">
-        <section class="relative h-[80vh] flex items-center px-6 overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1974" class="w-full h-full object-cover opacity-40">
-                <div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div>
-            </div>
-            <div class="relative z-10 max-w-7xl mx-auto w-full">
-                <span class="text-gold uppercase tracking-[0.4em] text-[10px] mb-4 block">Esculpindo a Perfeição</span>
-                <h2 class="text-6xl md:text-8xl font-serif mb-6 leading-tight">Corpo & <br><span class="italic text-gold">Contorno</span></h2>
-                <p class="max-w-md text-stone-400 font-light leading-relaxed mb-8">Tratamentos inovadores para contorno e firmeza, combinando tecnologia e técnicas manuais exclusivas.</p>
-                <button class="px-8 py-4 bg-gold text-black font-bold uppercase tracking-widest text-[10px] flex items-center gap-3">Conheça os Protocolos</button>
+        <!-- Nosso Espaço -->
+        <section class="py-24 px-6 bg-darkCard/30 border-y border-white/5">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?q=80&w=2070" class="rounded-3xl grayscale shadow-2xl">
+                <div>
+                    <h3 class="font-serif text-5xl mb-6">O Espaço <br><span class="italic text-gold">Facial Premium</span></h3>
+                    <p class="text-stone-400 font-light leading-relaxed mb-8">Nossas salas faciais são equipadas com iluminação LED cromoterápica e macas ergonômicas para seu conforto absoluto durante o procedimento.</p>
+                    <div class="grid grid-cols-2 gap-4 text-[10px] uppercase font-bold text-gold tracking-widest">
+                        <div class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3"></i> 100% Higienizado</div>
+                        <div class="flex items-center gap-2"><i data-lucide="check" class="w-3 h-3"></i> Climatização Individual</div>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- Depoimentos -->
         <section class="py-24 px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="gold-border-card p-10 flex gap-6 items-start rounded-3xl">
-                    <div class="w-12 h-12 border border-gold/30 rounded-full flex-shrink-0 flex items-center justify-center"><i data-lucide="gem" class="text-gold w-5 h-5"></i></div>
-                    <div>
-                        <h4 class="text-white font-serif text-2xl mb-2">Criolipólise</h4>
-                        <p class="text-stone-500 text-sm">Eliminação de gordura localizada através do congelamento controlado das células adiposas.</p>
-                    </div>
-                </div>
-                <div class="gold-border-card p-10 flex gap-6 items-start rounded-3xl">
-                    <div class="w-12 h-12 border border-gold/30 rounded-full flex-shrink-0 flex items-center justify-center"><i data-lucide="target" class="text-gold w-5 h-5"></i></div>
-                    <div>
-                        <h4 class="text-white font-serif text-2xl mb-2">Magic Touch Detox</h4>
-                        <p class="text-stone-500 text-sm">Circuito de tratamentos que promove perda de medidas e desintoxicação em uma única sessão.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- CONTEÚDO: SPA -->
-    <main id="tab-spa" class="tab-content pt-20">
-        <section class="relative h-[80vh] flex items-center px-6 overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070" class="w-full h-full object-cover opacity-30">
-                <div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div>
-            </div>
-            <div class="relative z-10 max-w-7xl mx-auto w-full">
-                <span class="text-gold uppercase tracking-[0.4em] text-[10px] mb-4 block">Santuário de Bem-Estar</span>
-                <h2 class="text-6xl md:text-8xl font-serif mb-6 leading-tight">O Nosso <br><span class="italic text-gold">Santuário</span></h2>
-                <p class="max-w-md text-stone-400 font-light leading-relaxed mb-8">Um refúgio de tranquilidade projetado para oferecer uma imersão total no luxo e no relaxamento profundo.</p>
-            </div>
-        </section>
-        <section class="py-24 px-6 bg-darkCard/50">
             <div class="max-w-4xl mx-auto text-center">
-                <i data-lucide="quote" class="text-gold/20 w-16 h-16 mx-auto mb-8"></i>
-                <h3 class="font-serif text-4xl italic mb-10 text-white leading-relaxed">"O cuidado que você merece, no tempo que você precisa. Um momento único de conexão com você mesma."</h3>
-                <div class="w-20 h-px bg-gold mx-auto"></div>
+                <i data-lucide="quote" class="text-gold/20 w-12 h-12 mx-auto mb-8"></i>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <p class="italic text-stone-300 font-light">"Minha pele mudou completamente após o protocolo facial da Arlete. O luxo e o cuidado são incomparáveis."<br><span class="block mt-4 text-gold not-italic font-bold text-[10px]">— MARIANA S.</span></p>
+                    <p class="italic text-stone-300 font-light">"O melhor atendimento que já tive. Saí renovada e muito mais confiante com meu rosto."<br><span class="block mt-4 text-gold not-italic font-bold text-[10px]">— BEATRIZ L.</span></p>
+                </div>
             </div>
         </section>
-    </main>
+    </div>
 
-    <!-- CONTEÚDO: DEPILAÇÃO -->
-    <main id="tab-depilacao" class="tab-content pt-20">
-        <section class="relative h-[80vh] flex items-center px-6 overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?q=80&w=2070" class="w-full h-full object-cover opacity-40">
-                <div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div>
-            </div>
-            <div class="relative z-10 max-w-7xl mx-auto w-full text-center md:text-left">
-                <span class="text-gold uppercase tracking-[0.4em] text-[10px] mb-4 block">Seda e Suavidade</span>
-                <h2 class="text-6xl md:text-8xl font-serif mb-6 leading-tight">Depilação <br><span class="italic text-gold">de Luxo</span></h2>
-                <p class="max-w-md text-stone-400 font-light leading-relaxed mb-8 mx-auto md:mx-0">Protocolos exclusivos de remoção de pelos que priorizam o conforto extremo e a saúde da sua pele.</p>
+    <!-- TAB: CORPORAL (Estrutura idêntica, muda conteúdo) -->
+    <div id="tab-corporal" class="tab-content">
+        <section class="relative h-screen flex items-center px-6">
+            <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1974" class="w-full h-full object-cover opacity-30"><div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div></div>
+            <div class="relative z-10 max-w-7xl mx-auto w-full">
+                <span class="text-gold uppercase tracking-[0.5em] text-[10px] mb-4 block">Esculpindo a Perfeição</span>
+                <h2 class="text-6xl md:text-8xl font-serif mb-8 leading-tight">Corpo & <br><span class="italic text-gold">Contorno</span></h2>
+                <button class="px-10 py-4 bg-gold text-black font-bold uppercase tracking-widest text-[10px]">Ver Protocolos Corporais</button>
             </div>
         </section>
-        <section class="py-24 px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <h5 class="text-gold font-serif text-2xl mb-4">Laser Premium</h5>
-                    <p class="text-stone-500 text-xs leading-relaxed font-light">Tecnologia indolor para eliminação definitiva dos pelos com máximo conforto.</p>
-                </div>
-                <div class="text-center">
-                    <h5 class="text-gold font-serif text-2xl mb-4">Cera Espanhola</h5>
-                    <p class="text-stone-500 text-xs leading-relaxed font-light">Técnica de baixa temperatura ideal para áreas e peles extremamente sensíveis.</p>
-                </div>
-                <div class="text-center">
-                    <h5 class="text-gold font-serif text-2xl mb-4">Método Egípcio</h5>
-                    <p class="text-stone-500 text-xs leading-relaxed font-light">Depilação com linha para definição impecável do rosto e sobrancelhas.</p>
+        <section class="py-24 px-6 bg-darkBody">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- 9 Quadrinhos Corporal -->
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Criolipólise</h4><p class="text-[11px] text-stone-500">Congelamento de gordura localizada.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Magic Touch Detox</h4><p class="text-[11px] text-stone-500">Circuito redutor de medidas imediato.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">DrenoDetox</h4><p class="text-[11px] text-stone-500">Eliminação de toxinas e líquidos.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Radiofrequência</h4><p class="text-[11px] text-stone-500">Combate à flacidez e celulite.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Carboxiterapia</h4><p class="text-[11px] text-stone-500">Melhora da circulação e estrias.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Lipo sem Cortes</h4><p class="text-[11px] text-stone-500">Ultrassom de alta potência.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Endermologia</h4><p class="text-[11px] text-stone-500">Modelagem do contorno corporal.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Corrente Russa</h4><p class="text-[11px] text-stone-500">Tonificação muscular intensa.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Massagem Relax</h4><p class="text-[11px] text-stone-500">Alívio de tensões e relaxamento.</p></div>
                 </div>
             </div>
         </section>
-    </main>
+        <section class="py-24 px-6 bg-darkCard/30"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center"><div><h3 class="font-serif text-5xl mb-6 italic text-gold">Sessão Corporal</h3><p class="text-stone-400 font-light">Equipamentos de última geração aprovados pela ANVISA para resultados reais.</p></div><img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1974" class="rounded-3xl grayscale"></div></section>
+    </div>
 
-    <!-- Seção Comum: CTA Final -->
-    <section class="py-32 bg-darkBody border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h3 class="font-serif text-5xl md:text-7xl mb-8 leading-tight">Pronta para sua <br><span class="italic text-gold font-light">Transformação?</span></h3>
-            <p class="text-stone-500 mb-16 uppercase tracking-[0.3em] text-[10px]">Reserve seu horário exclusivo na Estética Arlete</p>
-            
-            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a href="#" class="w-full sm:w-auto px-12 py-5 bg-gold text-black font-bold uppercase tracking-widest text-[10px] hover:bg-white transition-all flex items-center justify-center gap-3">
-                    <i data-lucide="phone" class="w-4 h-4"></i> Agendar via WhatsApp
-                </a>
-                <a href="#" class="w-full sm:w-auto px-12 py-5 border border-gold text-gold font-bold uppercase tracking-widest text-[10px] hover:bg-gold hover:text-black transition-all">
-                    Ver Tabela de Preços
-                </a>
+    <!-- TAB: SPA -->
+    <div id="tab-spa" class="tab-content">
+        <section class="relative h-screen flex items-center px-6">
+            <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?q=80&w=2070" class="w-full h-full object-cover opacity-30"><div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div></div>
+            <div class="relative z-10 max-w-7xl mx-auto w-full">
+                <span class="text-gold uppercase tracking-[0.5em] text-[10px] mb-4 block">Imersão em Bem-Estar</span>
+                <h2 class="text-6xl md:text-8xl font-serif mb-8 leading-tight">Ritual de <br><span class="italic text-gold">Spa</span></h2>
+            </div>
+        </section>
+        <section class="py-24 px-6 bg-darkBody">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Banho de Ouro</h4><p class="text-[11px] text-stone-500">Hidratação profunda e brilho.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Pedras Quentes</h4><p class="text-[11px] text-stone-500">Equilíbrio energético e relax.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Massagem Velas</h4><p class="text-[11px] text-stone-500">Calor e aromas relaxantes.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Escalda Pés</h4><p class="text-[11px] text-stone-500">Início de todos os rituais.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Argiloterapia</h4><p class="text-[11px] text-stone-500">Nutrição mineral corporal.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Spa dos Pés</h4><p class="text-[11px] text-stone-500">Cuidado e maciez extrema.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Massagem Crânio</h4><p class="text-[11px] text-stone-500">Alívio imediato de estresse.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Esfoliação Mar</h4><p class="text-[11px] text-stone-500">Pele renovada e macia.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Day Spa VIP</h4><p class="text-[11px] text-stone-500">4 horas de cuidados totais.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 bg-darkCard/30"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070" class="rounded-3xl shadow-2xl"><div><h3 class="font-serif text-5xl mb-6">Santuário <span class="italic text-gold">Arlete</span></h3><p class="text-stone-400 font-light">Aromas e sons pensados para desconectar você do mundo lá fora.</p></div></div></section>
+    </div>
+
+    <!-- TAB: DEPILAÇÃO -->
+    <div id="tab-depilacao" class="tab-content">
+        <section class="relative h-screen flex items-center px-6">
+            <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?q=80&w=2070" class="w-full h-full object-cover opacity-30"><div class="absolute inset-0 bg-gradient-to-r from-darkBody via-darkBody/80 to-transparent"></div></div>
+            <div class="relative z-10 max-w-7xl mx-auto w-full">
+                <span class="text-gold uppercase tracking-[0.5em] text-[10px] mb-4 block">Conforto e Suavidade</span>
+                <h2 class="text-6xl md:text-8xl font-serif mb-8 leading-tight">Depilação <br><span class="italic text-gold">Premium</span></h2>
+            </div>
+        </section>
+        <section class="py-24 px-6 bg-darkBody">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Laser Facial</h4><p class="text-[11px] text-stone-500">Eliminação definitiva e segura.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Cera Espanhola</h4><p class="text-[11px] text-stone-500">Menos dor, mais eficiência.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Linha Egípcia</h4><p class="text-[11px] text-stone-500">Definição total do rosto.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Laser Íntimo</h4><p class="text-[11px] text-stone-500">Conforto e higiene absoluta.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Cera Mel</h4><p class="text-[11px] text-stone-500">Hidratação durante a remoção.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Pernas Inteiras</h4><p class="text-[11px] text-stone-500">Toque de seda duradouro.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Depilação Masculina</h4><p class="text-[11px] text-stone-500">Cuidados especializados.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Laser Axilas</h4><p class="text-[11px] text-stone-500">Clareamento e liberdade.</p></div>
+                    <div class="service-card p-8 rounded-2xl text-center"><h4 class="text-white font-serif text-lg tracking-widest uppercase mb-2">Sobrancelhas</h4><p class="text-[11px] text-stone-500">Design com visagismo.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="py-24 px-6 bg-darkCard/30"><div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center"><div><h3 class="font-serif text-5xl mb-6">Higiene <span class="italic text-gold">e Segurança</span></h3><p class="text-stone-400 font-light leading-relaxed">Materiais 100% descartáveis e tecnologia laser de ponta para sua tranquilidade.</p></div><img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?q=80&w=2070" class="rounded-3xl grayscale"></div></section>
+    </div>
+
+    <!-- CTA FINAL (Comum a todas) -->
+    <section class="py-32 bg-darkBody border-t border-white/5 text-center px-6">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="font-serif text-5xl md:text-7xl mb-12">Pronta para sua <br><span class="italic text-gold font-light">Transformação?</span></h3>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="#" class="px-12 py-5 bg-gold text-black font-bold uppercase tracking-widest text-[10px] hover:bg-white transition-all shadow-xl shadow-gold/10">Agendar via WhatsApp</a>
+                <a href="#" class="px-12 py-5 border border-gold text-gold font-bold uppercase tracking-widest text-[10px] hover:bg-gold hover:text-black transition-all">Ver Tabela de Preços</a>
             </div>
         </div>
     </section>
 
-    <!-- Rodapé -->
-    <footer class="py-20 border-t border-white/5 bg-black">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
-            <div class="flex items-center gap-2 mb-8">
-                <div class="w-10 h-10 border border-gold/50 rounded-full flex items-center justify-center">
-                    <span class="text-gold font-serif text-xl italic">A</span>
-                </div>
-                <h1 class="text-lg font-serif tracking-[0.3em] uppercase text-gold">Estética Arlete</h1>
+    <!-- Footer -->
+    <footer class="py-16 bg-black border-t border-white/5 text-center">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <div class="w-8 h-8 border border-gold rounded-full flex items-center justify-center font-serif text-gold italic">A</div>
+                <h1 class="text-[10px] font-serif tracking-[0.4em] uppercase text-stone-500">Estética Arlete</h1>
             </div>
-            <p class="text-[9px] text-stone-700 uppercase tracking-[0.5em] mb-4 text-center">© 2026 Estética Arlete. Todos os direitos reservados.</p>
-            <p class="text-[8px] text-stone-800 uppercase tracking-widest">Onde a beleza encontra o luxo absoluto.</p>
+            <p class="text-[8px] text-stone-800 uppercase tracking-widest">© 2026 Estética Arlete • Onde a beleza encontra o luxo absoluto.</p>
         </div>
     </footer>
 
-    <!-- Lógica de Troca de Abas -->
     <script>
         function switchTab(tabId) {
-            // Esconde todo o conteúdo
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            // Remove classe ativa de todos os botões
-            document.querySelectorAll('.nav-link').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Mostra o conteúdo selecionado
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
             document.getElementById('tab-' + tabId).classList.add('active');
-            // Ativa o botão selecionado
             document.getElementById('btn-' + tabId).classList.add('active');
-
-            // Rola para o topo da página suavemente
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // Inicializa os ícones
         lucide.createIcons();
     </script>
 </body>
